@@ -18,5 +18,7 @@ Run a container with the image created:
 
 If you want to bash into the container, run the following commands:
 
-```docker ps
-docker exec -t -i <Docker ID> /bin/bash```
+```
+docker ps
+docker exec -t -i <Docker ID> /bin/bash
+```
