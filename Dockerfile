@@ -15,7 +15,7 @@ ENV SERVICE_NGINX_CLIENT_MAX_BODY_SIZE="50m"
 
 COPY conf/ /opt/docker/
 
-COPY data/* /app/
+COPY data /app/
 
 RUN set -x \
     # Install nginx
@@ -25,3 +25,5 @@ RUN set -x \
     && docker-image-cleanup
 
 EXPOSE 80 443
+
+RUN chmod 777 /app/uploads

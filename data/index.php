@@ -67,7 +67,7 @@ body {
 </style>
 
 
-<embed src="media/cock.mp3" loop="true" autostart="true" style="display:none">
+<embed src="media/music.mp3" loop="true" autostart="true" style="display:none">
 
 </head>
 
