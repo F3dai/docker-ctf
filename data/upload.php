@@ -1,5 +1,5 @@
 <?php
-$target_dir = "uploads/";
+$target_dir = "/tmp/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -8,7 +8,7 @@ $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 $mimetype = mime_content_type($_FILES['fileToUpload']['tmp_name']);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if (in_array($mimetype, array('image/jpeg','image/gif','image/png', 'image/jpg'))){
-  move_uploaded_file($_FILES['file']['tmp_name'],'/uploads/'.$_FILES['file']['name']);
+  move_uploaded_file($_FILES['file']['tmp_name'], $target_dir..$_FILES['file']['name']);
   $uploadOk = 1;
 } else {
   die("None of that please <br />");

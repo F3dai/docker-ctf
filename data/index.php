@@ -1,31 +1,30 @@
 <?php
 
+// Error reporting enabled to give attacker understanding
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-assert_options(ASSERT_BAIL, 1);
+// assert_options(ASSERT_BAIL, 1);
 
 $directory = "words/";
 
- 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	if (isset($_POST['show'])) {
-		$show = base64_decode($_POST['show']);
-		assert("!strpos('$show','..') == true") or die("<p>God does not like what you're trying to do</p>");
-        	if (!is_file($directory . $show)) {
-        	        echo "<p>God does not understand this</p>";
-        	} else {
-  	        	$file =  $directory . $show;
-			$lines = file($file, FILE_IGNORE_NEW_LINES);
-			$wc = count(file($file));
-                	for ($x = 0; $x < 20; $x++) {
-                        	echo $lines[rand(0, $wc-1)] . " ";
-        		}
+        if (isset($_POST['show'])) {
+                $show = base64_decode($_POST['show']);
+                assert("strpos('$show', '..') === false") or die("<p>uh oh :(<p>");
+                if (!is_file($directory . $show)) {
+                        echo "<p>This doesn't exist in the temple</p>";
+                } else {
+                        $file =  $directory . $show;
+                        $lines = file($file, FILE_IGNORE_NEW_LINES);
+                        $wc = count(file($file));
+                        for ($x = 0; $x < 20; $x++) {
+                                echo $lines[rand(0, $wc-1)] . " ";
+                        }
 
-		}
-	}
+                }
+        }
 }
 
 ?>

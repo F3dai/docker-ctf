@@ -3,6 +3,7 @@
 #    -- automatically generated  --
 #+++++++++++++++++++++++++++++++++++++++
 
+# Using php7.1 for assert vulnerability
 FROM webdevops/php:7.1
 
 ENV WEB_DOCUMENT_ROOT=/app \
@@ -13,17 +14,19 @@ ENV WEB_DOCUMENT_ROOT=/app \
 ENV WEB_PHP_SOCKET=127.0.0.1:9000
 ENV SERVICE_NGINX_CLIENT_MAX_BODY_SIZE="50m"
 
+# Copy web app and config over
 COPY conf/ /opt/docker/
-
 COPY data /app/
 
 RUN set -x \
     # Install nginx
     && apt-install \
-        nginx \
+        nginx curl nano net-tools sudo \
     && docker-run-bootstrap \
     && docker-image-cleanup
 
+# Open up web ports
 EXPOSE 80 443
 
-RUN chmod 777 /app/uploads
+# SUID exploitation
+RUN  chmod u+s /usr/bin/python
