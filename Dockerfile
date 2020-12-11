@@ -25,8 +25,6 @@ RUN set -x \
     && docker-run-bootstrap \
     && docker-image-cleanup
 
-RUN echo "display_errors = On" >> /opt/docker/etc/php/php.ini
-
 # Open up web ports
 EXPOSE 80 443
 
