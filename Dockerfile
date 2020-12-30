@@ -22,6 +22,7 @@ COPY data /app/
 
 # Installations
 RUN set -x \
+    && docker-service enable ssh \
     && apt-install \
         nginx curl nano net-tools socat sudo iproute2 openssh-server \
     && docker-run-bootstrap \
